@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <title>Galeria zdjec</title>
+</head>
+<body>
+    <div class="dodawanie">
+        <h1>Galeria zdjec</h1>
+        <form method="post" enctype="multipart/form-data">
+            <label for="plik" class="custom-file-upload">Wybierz zdjecie: </label>
+            <input type="file" id="plik" name="file" accept="image/*" required >
+            <button type="submit" class="custom-file-upload">Dodaj zdjecie na poczatek galerii</button>
+            <button class="custom-file-upload" id="usun" onclick="usunzdj(' {{ zdjecie }}')">Usuń zdjęcie</button>
+        </form>
+    </div>
+    <!-- Galeria zdjec -->
+    <div class="galeria" id="galeria">
+        {% for zdjecie in wszystkie_zdjecia %}
+            <img class="zdj" src="{{ url_for('pokaz_plik', filename=zdjecie) }}" alt="Zdjecie">
+        {% endfor %}
+    </div>
+    <div class="wybrane_zdj" id="wybrane">
+            <img id="preview" src="{{ zdjecie }}" alt="" style="max-width: 500px; max-height: 250px;">
+    </div>
+</body>
+</html>
